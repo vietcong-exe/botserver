@@ -1,21 +1,8 @@
-const { execSync } = require('child_process');
-
-function checkAndInstallDependencies() {
-    try {
-        require.resolve('ws');
-    } catch (e) {
-        console.log('ws module not found. Installing...');
-        execSync('bun install ws', { stdio: 'inherit' });
-        console.log('ws module installed successfully.');
-    }
-}
-
-checkAndInstallDependencies();
-
 const WebSocket = require('ws');
 
+const port = process.env.PORT || 8000;
 const server = new WebSocket.Server({
-    port: 8000,
+    port: port,
     maxPayload: 64 * 1024,
 });
 
@@ -164,4 +151,4 @@ setInterval(() => {
     console.log(`Connections: ${connections}, Exceptions: ${exceptions}, Blocked: ${blocked}, Channels: ${Object.keys(channels).length}`);
 }, 5000);
 
-console.log('WebSocket server running on port 8000');
+console.log(`WebSocket server running on port ${port}`);
