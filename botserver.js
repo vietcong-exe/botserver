@@ -1,5 +1,19 @@
 const WebSocket = require('ws');
 
+const { execSync } = require('child_process');
+
+function checkAndInstallDependencies() {
+    try {
+        require.resolve('ws');
+    } catch (e) {
+        console.log('ws module not found. Installing...');
+        execSync('node install ws', { stdio: 'inherit' });
+        console.log('ws module installed successfully.');
+    }
+}
+
+checkAndInstallDependencies();
+
 const port = process.env.PORT || 8000;
 const server = new WebSocket.Server({
     port: port,
