@@ -7,7 +7,7 @@ function checkAndInstallDependencies() {
         require.resolve('ws');
     } catch (e) {
         console.log('ws module not found. Installing...');
-        execSync('node install ws', { stdio: 'inherit' });
+        execSync('npm install ws', { stdio: 'inherit' });
         console.log('ws module installed successfully.');
     }
 }
